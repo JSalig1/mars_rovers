@@ -10,19 +10,18 @@ class Rover
   def operate(instructions)
     instructions.each_char do |instruction|
       if instruction == "M"
-        location = @locator.locate
-        new_location = @engine.move(location)
-        @locator.update(new_location)
+        target = @locator.route_course
+        new_location = @engine.move_to(target)
+        @locator.update_position_sensor(new_location)
       elsif instruction == "R"
         @locator.new_heading(1)
       elsif instruction == "L"
         @locator.new_heading(-1)
       end
-      puts @locator.locate.inspect
     end
   end
   
   def locate
-    puts "#{@locator.pos_x} #{@locator.pos_y} #{@locator.direction}"
+    puts @locator.locate.join(" ")
   end
 end

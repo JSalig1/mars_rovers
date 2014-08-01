@@ -1,26 +1,27 @@
-class Locator
-  attr_accessor :direction, :pos_x, :pos_y
+require_relative 'compass'
+require_relative 'position_sensor'
 
+class Locator
   def initialize(params)
-    @pos_x = params[0].to_i
-    @pos_y = params[1].to_i
-    @navigation = ["N", "E", "S", "W"]
-    @direction = "#{params[2]}"
+    @compass = Compass.new(params[2])
+    @position_sensor = PositionSensor.new(params)
   end
 
-  def update(move)
-    if @direction == "E" or @direction == "W"
-      @pos_x = @pos_x + move
-    elsif @direction == "N" or @direction == "S"
-      @pos_y = @pos_y + move
-    end
+  def update_position_sesnsor(new_location)
+    tracker = @position_sensor.active_tracker
+    @position_sensor.coordinates[tracker] = new_location
+  end
+
+  def route_course
+    { course: @position_sensor.current_position, heading: @compass.heading }
   end
 
   def new_heading(turn)
-    @direction = @navigation.rotate!(turn).first
+    @compass.update_navigation(turn)
+    @position_sensor.switch_trackers
   end
 
   def locate
-    [@pos_x, @pos_y, @direction]
+    @position_sensor.coordinates.values << @compass.direction
   end
 end
