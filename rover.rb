@@ -6,7 +6,7 @@ class Rover
     @locator = Locator.new(params)
     @engine = Engine.new
   end
-  
+
   def operate(instructions)
     instructions.each_char do |instruction|
       if instruction == "M"
@@ -20,7 +20,7 @@ class Rover
       end
     end
   end
-  
+
   def locate
     puts @locator.locate.join(" ")
   end

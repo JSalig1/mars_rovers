@@ -7,7 +7,7 @@ class Locator
     @position_sensor = PositionSensor.new(params)
   end
 
-  def update_position_sesnsor(new_location)
+  def update_position_sensor(new_location)
     tracker = @position_sensor.active_tracker
     @position_sensor.coordinates[tracker] = new_location
   end
