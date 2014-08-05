@@ -1,8 +1,10 @@
+# Mars Rovers
+
 To run the program use:
 
-'app_mission_to_mars.rb'
+  'app_mission_to_mars.rb'
 
-PROBLEM: Mars Rovers
+## PROBLEM: Mars Rovers
 
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars. This
 plateau, which is curiously rectangular, must be navigated by the rovers so that
